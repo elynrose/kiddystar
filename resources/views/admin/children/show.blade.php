@@ -25,18 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.child.fields.photo') }}
-                        </th>
-                        <td>
-                            @if($child->photo)
-                                <a href="{{ $child->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $child->photo->getUrl('thumb') }}">
-                                </a>
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.child.fields.first_name') }}
                         </th>
                         <td>
@@ -57,6 +45,18 @@
                         </th>
                         <td>
                             {{ $child->dob }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.child.fields.photo') }}
+                        </th>
+                        <td>
+                            @if($child->photo)
+                                <a href="{{ $child->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                    <img src="{{ $child->photo->getUrl('thumb') }}">
+                                </a>
+                            @endif
                         </td>
                     </tr>
                 </tbody>

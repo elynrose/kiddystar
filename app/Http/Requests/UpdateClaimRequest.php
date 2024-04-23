@@ -20,8 +20,6 @@ class UpdateClaimRequest extends FormRequest
             'points' => [
                 'required',
                 'integer',
-                'min:-2147483648',
-                'max:2147483647',
             ],
             'card_id' => [
                 'required',

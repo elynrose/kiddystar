@@ -12,6 +12,7 @@ use App\Models\CardBatch;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class CardsController extends Controller
 {
@@ -21,7 +22,7 @@ class CardsController extends Controller
     {
         abort_if(Gate::denies('card_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $cards = Card::with(['card_batch'])->get();
+        $cards = Card::with(['card_batch'])->where('created_by_id', Auth::user()->id)->get();
 
         return view('frontend.cards.index', compact('cards'));
     }

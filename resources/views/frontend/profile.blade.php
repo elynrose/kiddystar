@@ -9,14 +9,36 @@
                     {{ trans('global.my_profile') }}
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route("frontend.profile.update") }}">
+                    <form method="POST" action="{{ route('frontend.profile.update') }}">
                         @csrf
+
+                        @if(Auth::user()->type==0)
                         <div class="form-group">
-                            <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
-                            <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}" required>
+                            <label for="name">{{ trans('cruds.user.fields.name') }}</label>
+                            <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}">
                             @if($errors->has('name'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('name') }}
+                                </div>
+                            @endif
+                        </div>
+                        @endif
+                        <div class="form-group">
+                            <label class="required" for="first_name">{{ trans('cruds.user.fields.first_name') }}</label>
+                            <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" id="first_name" value="{{ old('first_name', auth()->user()->first_name) }}" required>
+                            @if($errors->has('first_name'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('first_name') }}
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required" for="last_name">{{ trans('cruds.user.fields.last_name') }}</label>
+                            <input class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" id="last_name" value="{{ old('last_name', auth()->user()->last_name) }}" required>
+                            @if($errors->has('last_name'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('last_name') }}
                                 </div>
                             @endif
                         </div>
@@ -85,7 +107,26 @@
                 </div>
             </div>
         </div>
+        @if(Route::has('frontend.profile.toggle-two-factor'))
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        {{ trans('global.two_factor.title') }}
+                    </div>
 
+                    <div class="card-body">
+                        <form method="POST" action="{{ route("frontend.profile.toggle-two-factor") }}">
+                            @csrf
+                            <div class="form-group">
+                                <button class="btn btn-danger" type="submit">
+                                    {{ auth()->user()->two_factor ? trans('global.two_factor.disable') : trans('global.two_factor.enable') }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 @endsection

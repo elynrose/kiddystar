@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyUserCardRequest;
 use App\Http\Requests\StoreUserCardRequest;
 use App\Http\Requests\UpdateUserCardRequest;
 use App\Models\Card;
-use App\Models\Child;
+use App\Models\User;
 use App\Models\UserCard;
 use Gate;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class UserCardController extends Controller
     {
         abort_if(Gate::denies('user_card_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userCards = UserCard::with(['card', 'children', 'created_by'])->get();
+        $userCards = UserCard::with(['card', 'user', 'created_by'])->get();
 
         return view('admin.userCards.index', compact('userCards'));
     }
@@ -30,9 +30,9 @@ class UserCardController extends Controller
 
         $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $childrens = Child::pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.userCards.create', compact('cards', 'childrens'));
+        return view('admin.userCards.create', compact('cards', 'users'));
     }
 
     public function store(StoreUserCardRequest $request)
@@ -48,11 +48,11 @@ class UserCardController extends Controller
 
         $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $childrens = Child::pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $userCard->load('card', 'children', 'created_by');
+        $userCard->load('card', 'user', 'created_by');
 
-        return view('admin.userCards.edit', compact('cards', 'childrens', 'userCard'));
+        return view('admin.userCards.edit', compact('cards', 'userCard', 'users'));
     }
 
     public function update(UpdateUserCardRequest $request, UserCard $userCard)
@@ -66,7 +66,7 @@ class UserCardController extends Controller
     {
         abort_if(Gate::denies('user_card_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userCard->load('card', 'children', 'created_by');
+        $userCard->load('card', 'user', 'created_by');
 
         return view('admin.userCards.show', compact('userCard'));
     }

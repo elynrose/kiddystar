@@ -32,13 +32,13 @@
                             {{ trans('cruds.user.fields.first_name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.user.fields.verified') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.two_factor') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.last_name') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.state') }}
@@ -54,9 +54,6 @@
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.email') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.user.fields.partner_email') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
@@ -91,15 +88,15 @@
                                 {{ $user->first_name ?? '' }}
                             </td>
                             <td>
+                                {{ $user->last_name ?? '' }}
+                            </td>
+                            <td>
                                 <span style="display:none">{{ $user->verified ?? '' }}</span>
                                 <input type="checkbox" disabled="disabled" {{ $user->verified ? 'checked' : '' }}>
                             </td>
                             <td>
                                 <span style="display:none">{{ $user->two_factor ?? '' }}</span>
                                 <input type="checkbox" disabled="disabled" {{ $user->two_factor ? 'checked' : '' }}>
-                            </td>
-                            <td>
-                                {{ $user->last_name ?? '' }}
                             </td>
                             <td>
                                 {{ App\Models\User::STATE_SELECT[$user->state] ?? '' }}
@@ -115,9 +112,6 @@
                             </td>
                             <td>
                                 {{ $user->email ?? '' }}
-                            </td>
-                            <td>
-                                {{ $user->partner_email ?? '' }}
                             </td>
                             <td>
                                 {{ $user->email_verified_at ?? '' }}

@@ -24,18 +24,18 @@
                 <span class="help-block">{{ trans('cruds.userCard.fields.card_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="children_id">{{ trans('cruds.userCard.fields.children') }}</label>
-                <select class="form-control select2 {{ $errors->has('children') ? 'is-invalid' : '' }}" name="children_id" id="children_id" required>
-                    @foreach($childrens as $id => $entry)
-                        <option value="{{ $id }}" {{ old('children_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                <label class="required" for="user_id">{{ trans('cruds.userCard.fields.user') }}</label>
+                <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}" name="user_id" id="user_id" required>
+                    @foreach($users as $id => $entry)
+                        <option value="{{ $id }}" {{ old('user_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
                 </select>
-                @if($errors->has('children'))
+                @if($errors->has('user'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('children') }}
+                        {{ $errors->first('user') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.userCard.fields.children_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.userCard.fields.user_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

@@ -10,14 +10,14 @@
         <form method="POST" action="{{ route("admin.points.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="reason">{{ trans('cruds.point.fields.reason') }}</label>
-                <input class="form-control {{ $errors->has('reason') ? 'is-invalid' : '' }}" type="text" name="reason" id="reason" value="{{ old('reason', '') }}" required>
-                @if($errors->has('reason'))
+                <label class="required" for="amount_spent">{{ trans('cruds.point.fields.amount_spent') }}</label>
+                <input class="form-control {{ $errors->has('amount_spent') ? 'is-invalid' : '' }}" type="number" name="amount_spent" id="amount_spent" value="{{ old('amount_spent', '') }}" step="0.01" required>
+                @if($errors->has('amount_spent'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('reason') }}
+                        {{ $errors->first('amount_spent') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.point.fields.reason_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.point.fields.amount_spent_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="points">{{ trans('cruds.point.fields.points') }}</label>

@@ -21,7 +21,7 @@ class UpdateUserCardRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'children_id' => [
+            'user_id' => [
                 'required',
                 'integer',
             ],

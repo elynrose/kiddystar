@@ -10,17 +10,6 @@
         <form method="POST" action="{{ route("admin.children.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="photo">{{ trans('cruds.child.fields.photo') }}</label>
-                <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
-                </div>
-                @if($errors->has('photo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photo') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.child.fields.photo_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="unique">{{ trans('cruds.child.fields.unique') }}</label>
                 <input class="form-control {{ $errors->has('unique') ? 'is-invalid' : '' }}" type="text" name="unique" id="unique" value="{{ old('unique', '') }}" required>
                 @if($errors->has('unique'))
@@ -59,6 +48,17 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.child.fields.dob_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="photo">{{ trans('cruds.child.fields.photo') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
+                </div>
+                @if($errors->has('photo'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('photo') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.child.fields.photo_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

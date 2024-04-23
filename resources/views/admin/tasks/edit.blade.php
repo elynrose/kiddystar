@@ -21,20 +21,6 @@
                 <span class="help-block">{{ trans('cruds.task.fields.task_name_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="category_id">{{ trans('cruds.task.fields.category') }}</label>
-                <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id" id="category_id">
-                    @foreach($categories as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('category_id') ? old('category_id') : $task->category->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('category'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('category') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.task.fields.category_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="points">{{ trans('cruds.task.fields.points') }}</label>
                 <input class="form-control {{ $errors->has('points') ? 'is-invalid' : '' }}" type="number" name="points" id="points" value="{{ old('points', $task->points) }}" step="1" required>
                 @if($errors->has('points'))

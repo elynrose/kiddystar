@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyTaskRequest;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Models\Category;
 use App\Models\Child;
 use App\Models\Task;
+use App\Models\Category;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class TasksController extends Controller
 {
@@ -21,7 +22,7 @@ class TasksController extends Controller
 
         $tasks = Task::with(['category', 'assigned_tos', 'created_by'])->get();
 
-        return view('frontend.tasks.index', compact('tasks'));
+        return view('frontend.pages.all-tasks', compact('tasks'));
     }
 
     public function create()
@@ -32,7 +33,7 @@ class TasksController extends Controller
 
         $assigned_tos = Child::pluck('first_name', 'id');
 
-        return view('frontend.tasks.create', compact('assigned_tos', 'categories'));
+        return view('frontend.pages.add-task', compact('assigned_tos', 'categories'));
     }
 
     public function store(StoreTaskRequest $request)
@@ -45,7 +46,6 @@ class TasksController extends Controller
 
     public function edit(Task $task)
     {
-        abort_if(Gate::denies('task_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $categories = Category::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
@@ -68,7 +68,7 @@ class TasksController extends Controller
     {
         abort_if(Gate::denies('task_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $task->load('category', 'assigned_tos', 'created_by');
+        $task->load('assigned_tos');
 
         return view('frontend.tasks.show', compact('task'));
     }

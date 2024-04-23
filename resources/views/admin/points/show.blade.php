@@ -25,10 +25,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.point.fields.reason') }}
+                            {{ trans('cruds.point.fields.amount_spent') }}
                         </th>
                         <td>
-                            {{ $point->reason }}
+                            {{ $point->amount_spent }}
                         </td>
                     </tr>
                     <tr>

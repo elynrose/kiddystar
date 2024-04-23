@@ -24,11 +24,12 @@ class StoreRewardRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'category' => [
+                'string',
+            ],
             'points' => [
                 'required',
                 'integer',
-                'min:-2147483648',
-                'max:2147483647',
             ],
         ];
     }

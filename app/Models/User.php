@@ -25,15 +25,14 @@ class User extends Authenticatable
         '0' => 'Business',
     ];
 
-    public const STATE_SELECT = [
-        'Alaska'  => 'Alaska',
-        'Alabama' => 'Alabama',
-    ];
-
     protected $hidden = [
         'remember_token', 'two_factor_code',
         'password',
-        'partner_password',
+    ];
+
+    public const STATE_SELECT = [
+        'Alaska'  => 'Alaska',
+        'Alabama' => 'Alabama',
     ];
 
     protected $dates = [
@@ -50,21 +49,19 @@ class User extends Authenticatable
         'type',
         'name',
         'first_name',
+        'last_name',
         'verified',
         'verified_at',
         'verification_token',
         'two_factor',
-        'last_name',
-        'two_factor_code',
         'state',
+        'two_factor_code',
         'city',
         'street',
         'zip',
         'email',
-        'partner_email',
         'email_verified_at',
         'password',
-        'partner_password',
         'remember_token',
         'paid',
         'expires',

@@ -20,18 +20,14 @@
                 <span class="help-block">{{ trans('cruds.claim.fields.points_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="reward_id">{{ trans('cruds.claim.fields.reward') }}</label>
-                <select class="form-control select2 {{ $errors->has('reward') ? 'is-invalid' : '' }}" name="reward_id" id="reward_id">
-                    @foreach($rewards as $id => $entry)
-                        <option value="{{ $id }}" {{ old('reward_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('reward'))
+                <label class="required" for="amount_used">{{ trans('cruds.claim.fields.amount_used') }}</label>
+                <input class="form-control {{ $errors->has('amount_used') ? 'is-invalid' : '' }}" type="number" name="amount_used" id="amount_used" value="{{ old('amount_used', '') }}" step="0.01" required>
+                @if($errors->has('amount_used'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('reward') }}
+                        {{ $errors->first('amount_used') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.claim.fields.reward_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.claim.fields.amount_used_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="card_id">{{ trans('cruds.claim.fields.card') }}</label>

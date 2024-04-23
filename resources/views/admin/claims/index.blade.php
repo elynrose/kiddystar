@@ -26,16 +26,7 @@
                             {{ trans('cruds.claim.fields.points') }}
                         </th>
                         <th>
-                            {{ trans('cruds.claim.fields.reward') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.reward.fields.price') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.reward.fields.quantity') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.reward.fields.points') }}
+                            {{ trans('cruds.claim.fields.amount_used') }}
                         </th>
                         <th>
                             {{ trans('cruds.claim.fields.card') }}
@@ -55,16 +46,7 @@
                                 {{ $claim->points ?? '' }}
                             </td>
                             <td>
-                                {{ $claim->reward->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $claim->reward->price ?? '' }}
-                            </td>
-                            <td>
-                                {{ $claim->reward->quantity ?? '' }}
-                            </td>
-                            <td>
-                                {{ $claim->reward->points ?? '' }}
+                                {{ $claim->amount_used ?? '' }}
                             </td>
                             <td>
                                 {{ $claim->card->code ?? '' }}

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class Child extends Model implements HasMedia
 {
@@ -51,6 +53,16 @@ class Child extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
+    public function getDobAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setDobAttribute($value)
+    {
+        $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
     public function getPhotoAttribute()
     {
         $file = $this->getMedia('photo')->last();
@@ -63,18 +75,38 @@ class Child extends Model implements HasMedia
         return $file;
     }
 
-    public function getDobAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setDobAttribute($value)
-    {
-        $this->attributes['dob'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
-
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by_id');
     }
+
+ /**
+ * Generate a unique alphanumeric code.
+ *
+ * @param int $length Length of the code to generate.
+ * @param string $tableName The table to check the uniqueness of the code.
+ * @param string $columnName The column in the table to check the uniqueness against.
+ * @return string
+ */
+    public static function generateUniqueCode($length = 10, $table)
+    {
+    $unique = false;
+    $code = '';
+
+    // Continue generating a new code until a unique one is found
+    while (!$unique) {
+        // Generate random alphanumeric code
+        $code = strtoupper(Str::random($length));
+
+        // Check if the code exists in the specified table and column
+        $exists = DB::table($table)->where('unique', $code)->exists();
+
+        if (!$exists) {
+            $unique = true;
+        }
+    }
+
+    return $code;
+}
+
 }

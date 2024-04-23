@@ -21,9 +21,9 @@ class Point extends Model
     ];
 
     protected $fillable = [
-        'reason',
         'points',
         'card_id',
+        'reason',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -38,7 +38,7 @@ class Point extends Model
     public static function boot()
     {
         parent::boot();
-        self::observe(new \App\Observers\PointActionObserver);
+     //   self::observe(new \App\Observers\PointActionObserver);
     }
 
     public function card()
@@ -49,5 +49,15 @@ class Point extends Model
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
+    
+    public function total_points($card_id, $created_by_id)
+    {
+        return Point::where('card_id', $card_id)->where('created_by_id', $created_by_id)->sum();
     }
 }

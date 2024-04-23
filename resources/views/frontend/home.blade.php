@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                   <h1> {{ $user_points }} </h1>
                 </div>
             </div>
         </div>

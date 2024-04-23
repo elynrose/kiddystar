@@ -8,7 +8,6 @@ use App\Http\Requests\StoreClaimRequest;
 use App\Http\Requests\UpdateClaimRequest;
 use App\Models\Card;
 use App\Models\Claim;
-use App\Models\Reward;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +18,7 @@ class ClaimsController extends Controller
     {
         abort_if(Gate::denies('claim_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $claims = Claim::with(['reward', 'card', 'created_by'])->get();
+        $claims = Claim::with(['card', 'created_by'])->get();
 
         return view('admin.claims.index', compact('claims'));
     }
@@ -28,11 +27,9 @@ class ClaimsController extends Controller
     {
         abort_if(Gate::denies('claim_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $rewards = Reward::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.claims.create', compact('cards', 'rewards'));
+        return view('admin.claims.create', compact('cards'));
     }
 
     public function store(StoreClaimRequest $request)
@@ -46,13 +43,11 @@ class ClaimsController extends Controller
     {
         abort_if(Gate::denies('claim_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $rewards = Reward::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $claim->load('reward', 'card', 'created_by');
+        $claim->load('card', 'created_by');
 
-        return view('admin.claims.edit', compact('cards', 'claim', 'rewards'));
+        return view('admin.claims.edit', compact('cards', 'claim'));
     }
 
     public function update(UpdateClaimRequest $request, Claim $claim)
@@ -66,7 +61,7 @@ class ClaimsController extends Controller
     {
         abort_if(Gate::denies('claim_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $claim->load('reward', 'card', 'created_by');
+        $claim->load('card', 'created_by');
 
         return view('admin.claims.show', compact('claim'));
     }

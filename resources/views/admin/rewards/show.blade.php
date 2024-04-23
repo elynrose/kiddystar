@@ -53,6 +53,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.reward.fields.quantity') }}
+                        </th>
+                        <td>
+                            {{ $reward->quantity }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.reward.fields.price') }}
+                        </th>
+                        <td>
+                            {{ $reward->price }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.reward.fields.points') }}
                         </th>
                         <td>

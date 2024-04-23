@@ -17,10 +17,6 @@ class StorePointRequest extends FormRequest
     public function rules()
     {
         return [
-            'reason' => [
-                'string',
-                'required',
-            ],
             'points' => [
                 'required',
                 'integer',
@@ -30,6 +26,9 @@ class StorePointRequest extends FormRequest
             'card_id' => [
                 'required',
                 'integer',
+            ],
+            'reason' => [
+                'string',
             ],
         ];
     }

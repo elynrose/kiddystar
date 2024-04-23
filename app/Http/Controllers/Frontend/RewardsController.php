@@ -13,6 +13,11 @@ use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
+use App\Models\Configuration;
+use Session;
+use Redirect;       
+
 
 class RewardsController extends Controller
 {
@@ -22,16 +27,16 @@ class RewardsController extends Controller
     {
         abort_if(Gate::denies('reward_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $rewards = Reward::with(['created_by', 'media'])->get();
+        $rewards = Reward::with(['created_by', 'media'])->where('created_by_id', Auth::user()->id)->get();
 
-        return view('frontend.rewards.index', compact('rewards'));
+        return view('frontend.pages.all-rewards', compact('rewards'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('reward_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.rewards.create');
+        return view('frontend.pages.add-reward');
     }
 
     public function store(StoreRewardRequest $request)

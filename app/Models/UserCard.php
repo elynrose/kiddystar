@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Point;
 
 class UserCard extends Model
 {
@@ -22,8 +23,9 @@ class UserCard extends Model
 
     protected $fillable = [
         'card_id',
-        'created_at',
+        'user_id',
         'children_id',
+        'created_at',
         'updated_at',
         'deleted_at',
         'created_by_id',
@@ -47,5 +49,9 @@ class UserCard extends Model
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by_id');
+    }
+
+    public function count_points($card_id, $created_by_id){
+        return Point::where('card_id', $card_id)->where('created_by_id', $created_by_id)->sum();
     }
 }

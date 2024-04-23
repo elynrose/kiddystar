@@ -8,10 +8,12 @@ use App\Http\Requests\MassDestroyChildRequest;
 use App\Http\Requests\StoreChildRequest;
 use App\Http\Requests\UpdateChildRequest;
 use App\Models\Child;
+use App\Models\UserCard;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class ChildrenController extends Controller
 {
@@ -21,7 +23,7 @@ class ChildrenController extends Controller
     {
         abort_if(Gate::denies('child_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $children = Child::with(['created_by', 'media'])->get();
+        $children = Child::with(['created_by', 'media'])->where('created_by_id', Auth::user()->id)->get();
 
         return view('frontend.children.index', compact('children'));
     }
@@ -35,7 +37,27 @@ class ChildrenController extends Controller
 
     public function store(StoreChildRequest $request)
     {
-        $child = Child::create($request->all());
+
+          // Validate the request data
+          $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'unique' => 'required|string|max:255',
+            'card_id' => 'required|int',
+            'dob' => 'required|date',
+            'card_id' => 'exists:cards,id', // Assuming 'cards' is your table name and 'id' is the primary key
+            'created_by_id' => 'sometimes|nullable|exists:users,id', // Validate 'created_by_id' exists in 'users' table
+        ]);
+
+
+        $child = Child::create([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'dob' => $validated['dob'],
+            'card_id' => $validated['card_id'],
+            'unique' => $validated['unique'],
+        ]
+        );
 
         if ($request->input('photo', false)) {
             $child->addMedia(storage_path('tmp/uploads/' . basename($request->input('photo'))))->toMediaCollection('photo');
@@ -45,7 +67,19 @@ class ChildrenController extends Controller
             Media::whereIn('id', $media)->update(['model_id' => $child->id]);
         }
 
-        return redirect()->route('frontend.children.index');
+        if($child){
+          
+                // Create a user card if card_id and created_by_id are provided
+                if (!empty($validated['card_id'])) {
+                    $userCard = UserCard::create([
+                        'card_id' => $validated['card_id'],
+                        'children_id' => $child->id,
+                        'created_by_id' => $validated['created_by_id'] ?? Auth::id(), // Default to current user's ID if not provided
+                    ]);
+                }
+        }
+
+        return redirect()->route('frontend.user-cards.index');
     }
 
     public function edit(Child $child)
@@ -54,7 +88,7 @@ class ChildrenController extends Controller
 
         $child->load('created_by');
 
-        return view('frontend.children.edit', compact('child'));
+        return view('frontend.pages.edit-child', compact('child'));
     }
 
     public function update(UpdateChildRequest $request, Child $child)
@@ -72,7 +106,7 @@ class ChildrenController extends Controller
             $child->photo->delete();
         }
 
-        return redirect()->route('frontend.children.index');
+        return redirect()->route('frontend.user-cards.index');
     }
 
     public function show(Child $child)

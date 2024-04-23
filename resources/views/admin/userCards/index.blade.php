@@ -26,13 +26,7 @@
                             {{ trans('cruds.userCard.fields.card') }}
                         </th>
                         <th>
-                            {{ trans('cruds.userCard.fields.children') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.child.fields.last_name') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.child.fields.dob') }}
+                            {{ trans('cruds.userCard.fields.user') }}
                         </th>
                         <th>
                             &nbsp;
@@ -49,13 +43,7 @@
                                 {{ $userCard->card->code ?? '' }}
                             </td>
                             <td>
-                                {{ $userCard->children->first_name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $userCard->children->last_name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $userCard->children->dob ?? '' }}
+                                {{ $userCard->user->name ?? '' }}
                             </td>
                             <td>
                                 @can('user_card_show')

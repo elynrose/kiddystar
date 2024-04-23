@@ -26,9 +26,6 @@
                             {{ trans('cruds.task.fields.task_name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.task.fields.category') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.task.fields.points') }}
                         </th>
                         <th>
@@ -50,9 +47,6 @@
                             </td>
                             <td>
                                 {{ $task->task_name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $task->category->name ?? '' }}
                             </td>
                             <td>
                                 {{ $task->points ?? '' }}

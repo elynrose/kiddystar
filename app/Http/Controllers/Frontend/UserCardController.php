@@ -7,11 +7,16 @@ use App\Http\Requests\MassDestroyUserCardRequest;
 use App\Http\Requests\StoreUserCardRequest;
 use App\Http\Requests\UpdateUserCardRequest;
 use App\Models\Card;
-use App\Models\Child;
+use App\Models\Point;
+use App\Models\User;
 use App\Models\UserCard;
+use App\Models\Claim;
+use App\Models\Children;
+use App\Models\Task;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class UserCardController extends Controller
 {
@@ -19,20 +24,25 @@ class UserCardController extends Controller
     {
         abort_if(Gate::denies('user_card_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userCards = UserCard::with(['card', 'children', 'created_by'])->get();
+        $userCards = UserCard::with(['card', 'children', 'created_by'])->where('created_by_id', Auth::user()->id)->get();
 
-        return view('frontend.userCards.index', compact('userCards'));
+        return view('frontend.pages.customers', compact('userCards'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         abort_if(Gate::denies('user_card_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
+        //Check and validate request segment
+        if($request->segment(3) && !empty($request->segment(3))){
+           $card_code = $request->segment(3);
+        }
+        //Get the card id based on the card code
+        $cards = Card::where('code', $card_code)->first();
+        $card_id = $cards->id;
+        $created_by_id = Auth::user()->id;
 
-        $childrens = Child::pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('frontend.userCards.create', compact('cards', 'childrens'));
+        return view('frontend.userCards.add', compact('card_id', 'created_by_id'));
     }
 
     public function store(StoreUserCardRequest $request)
@@ -48,11 +58,11 @@ class UserCardController extends Controller
 
         $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $childrens = Child::pluck('first_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $userCard->load('card', 'children', 'created_by');
+        $userCard->load('card', 'user', 'created_by');
 
-        return view('frontend.userCards.edit', compact('cards', 'childrens', 'userCard'));
+        return view('frontend.userCards.edit', compact('cards', 'userCard', 'users'));
     }
 
     public function update(UpdateUserCardRequest $request, UserCard $userCard)
@@ -66,9 +76,15 @@ class UserCardController extends Controller
     {
         abort_if(Gate::denies('user_card_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $userCard->load('card', 'children', 'created_by');
+        $userCard->load('card', 'user',  'created_by');
 
-        return view('frontend.userCards.show', compact('userCard'));
+        $user_points =  Point::where('card_id', '=', $userCard->card_id)->where('created_by_id', Auth::user()->id)->sum('points');
+        $all_points =  Point::where('card_id', '=', $userCard->card_id)->where('created_by_id', Auth::user()->id)->get();
+        
+      
+
+        return view('frontend.userCards.show', compact('userCard', 'user_points',  'all_points', 'all_claims', 'user_claims'));
+
     }
 
     public function destroy(UserCard $userCard)
@@ -90,4 +106,36 @@ class UserCardController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+
+    public function addPoints(Request $request)
+    {
+        $data = $request->validate([
+            'task' => 'required|integer',
+            'child' => 'required|integer',
+        ]);
+
+        try {
+
+        $task = Task::where('id', $data['task'])->first();
+        $card = UserCard::where('children_id', $data['child'])->first();
+
+        //Add points to user
+        $user_points = [
+            'points'=>$task->points,
+            'reason'=>$task->task_name,
+            'card_id'=>$card->card_id,
+            'created_by_id'=>Auth::user()->id,
+        ];
+
+        Point::create( $user_points );
+
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['message' => 'Record not found'], 404);
+        }
+       
+
+    }
+
+
 }

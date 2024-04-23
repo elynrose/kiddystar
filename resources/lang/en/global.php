@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'add_stars'                        => 'Add Stars',
+    'claim_stars'                        => 'Claim Stars',
     'actions'                        => 'Actions',
     'add'                            => 'Add',
     'allRightsReserved'              => 'All rights reserved.',
@@ -71,6 +73,11 @@ return [
     'reply'                          => 'Reply',
     'body'                           => 'Body',
     'discard'                        => 'Discard',
+    'menu_children'                        => 'Children',
+    'menu_rewards'                        => 'Rewards',
+    'menu_config'                        => 'Configuration',
+    'menu_task'                        => 'Tasks',
+    'menu_categories'                        => 'Category',
     'datatables'                     => [
         'copy'          => 'Copy',
         'csv'           => 'CSV',

@@ -33,10 +33,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.claim.fields.reward') }}
+                            {{ trans('cruds.claim.fields.amount_used') }}
                         </th>
                         <td>
-                            {{ $claim->reward->name ?? '' }}
+                            {{ $claim->amount_used }}
                         </td>
                     </tr>
                     <tr>

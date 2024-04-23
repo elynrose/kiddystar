@@ -16,7 +16,7 @@
             </a>
         </li>
         @can('user_management_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/users*") ? "c-show" : "" }}">
+            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/users*") ? "c-show" : "" }} {{ request()->is("admin/configurations*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
                     <i class="fa-fw fas fa-users c-sidebar-nav-icon">
 
@@ -51,6 +51,16 @@
 
                                 </i>
                                 {{ trans('cruds.user.title') }}
+                            </a>
+                        </li>
+                    @endcan
+                    @can('configuration_access')
+                        <li class="c-sidebar-nav-item">
+                            <a href="{{ route("admin.configurations.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/configurations") || request()->is("admin/configurations/*") ? "c-active" : "" }}">
+                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+
+                                </i>
+                                {{ trans('cruds.configuration.title') }}
                             </a>
                         </li>
                     @endcan
@@ -107,46 +117,6 @@
                 </a>
             </li>
         @endcan
-        @can('reward_access')
-            <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.rewards.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/rewards") || request()->is("admin/rewards/*") ? "c-active" : "" }}">
-                    <i class="fa-fw fas fa-box-open c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.reward.title') }}
-                </a>
-            </li>
-        @endcan
-        @can('child_access')
-            <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.children.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/children") || request()->is("admin/children/*") ? "c-active" : "" }}">
-                    <i class="fa-fw fas fa-users c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.child.title') }}
-                </a>
-            </li>
-        @endcan
-        @can('task_access')
-            <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.tasks.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/tasks") || request()->is("admin/tasks/*") ? "c-active" : "" }}">
-                    <i class="fa-fw fas fa-th c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.task.title') }}
-                </a>
-            </li>
-        @endcan
-        @can('completed_access')
-            <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.completeds.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/completeds") || request()->is("admin/completeds/*") ? "c-active" : "" }}">
-                    <i class="fa-fw far fa-times-circle c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.completed.title') }}
-                </a>
-            </li>
-        @endcan
         @can('user_alert_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.user-alerts.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/user-alerts") || request()->is("admin/user-alerts/*") ? "c-active" : "" }}">
@@ -157,13 +127,13 @@
                 </a>
             </li>
         @endcan
-        @can('category_access')
+        @can('reward_access')
             <li class="c-sidebar-nav-item">
-                <a href="{{ route("admin.categories.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/categories") || request()->is("admin/categories/*") ? "c-active" : "" }}">
-                    <i class="fa-fw fas fa-bars c-sidebar-nav-icon">
+                <a href="{{ route("admin.rewards.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/rewards") || request()->is("admin/rewards/*") ? "c-active" : "" }}">
+                    <i class="fa-fw fas fa-box-open c-sidebar-nav-icon">
 
                     </i>
-                    {{ trans('cruds.category.title') }}
+                    {{ trans('cruds.reward.title') }}
                 </a>
             </li>
         @endcan

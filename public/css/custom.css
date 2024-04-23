@@ -1,3 +1,21 @@
+html,body {
+ 
+}
+
+.case {
+    border: 21px solid #e9ee6259;
+}
+
+
+.side-nav li a {
+    color:#111;
+    text-decoration: none;
+    font-size:.9rem;
+    font-weight:600;
+}
+.card-header {
+    background-color:white!important;
+}
 .ck-editor__editable,
 textarea {
     min-height: 150px;
@@ -129,4 +147,48 @@ table.dataTable thead .sorting_desc {
 
 .custom-select.form-control-sm {
     padding: 0.25rem 1.5rem;
+}
+
+.barcode {
+    font-family: "Libre Barcode 39", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size:2rem;
+  }
+  
+
+  .number{
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .slider {
+    width: 80%; /* Adjust the width as necessary */
+    display: inline-block;
+    vertical-align: middle;
+}
+#points {
+    width: 100px;
+}
+
+.yellow {
+    color:rgb(228, 196, 17);
+}
+
+.blue {
+    color:blue;
+}
+
+.red {
+    color:red;
+}
+
+.purple {
+    color:rgb(114, 41, 179);
+}
+.disabled {
+    color: gray;
+    cursor: not-allowed;
 }

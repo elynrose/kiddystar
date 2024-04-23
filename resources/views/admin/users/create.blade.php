@@ -110,16 +110,6 @@
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="partner_email">{{ trans('cruds.user.fields.partner_email') }}</label>
-                <input class="form-control {{ $errors->has('partner_email') ? 'is-invalid' : '' }}" type="email" name="partner_email" id="partner_email" value="{{ old('partner_email') }}">
-                @if($errors->has('partner_email'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('partner_email') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.partner_email_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
                 <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
                 @if($errors->has('password'))
@@ -128,16 +118,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="partner_password">{{ trans('cruds.user.fields.partner_password') }}</label>
-                <input class="form-control {{ $errors->has('partner_password') ? 'is-invalid' : '' }}" type="password" name="partner_password" id="partner_password">
-                @if($errors->has('partner_password'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('partner_password') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.user.fields.partner_password_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>

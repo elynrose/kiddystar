@@ -33,10 +33,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userCard.fields.children') }}
+                            {{ trans('cruds.userCard.fields.user') }}
                         </th>
                         <td>
-                            {{ $userCard->children->first_name ?? '' }}
+                            {{ $userCard->user->name ?? '' }}
                         </td>
                     </tr>
                 </tbody>

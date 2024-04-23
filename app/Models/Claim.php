@@ -20,6 +20,7 @@ class Claim extends Model
         'deleted_at',
     ];
 
+
     protected $fillable = [
         'points',
         'reward_id',
@@ -38,13 +39,14 @@ class Claim extends Model
     public static function boot()
     {
         parent::boot();
-        self::observe(new \App\Observers\ClaimActionObserver);
+      //  self::observe(new \App\Observers\ClaimActionObserver);
     }
 
     public function reward()
     {
         return $this->belongsTo(Reward::class, 'reward_id');
     }
+
 
     public function card()
     {

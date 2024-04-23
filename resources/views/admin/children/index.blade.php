@@ -23,9 +23,6 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.child.fields.photo') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.child.fields.first_name') }}
                         </th>
                         <th>
@@ -33,6 +30,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.child.fields.dob') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.child.fields.photo') }}
                         </th>
                         <th>
                             &nbsp;
@@ -46,13 +46,6 @@
 
                             </td>
                             <td>
-                                @if($child->photo)
-                                    <a href="{{ $child->photo->getUrl() }}" target="_blank" style="display: inline-block">
-                                        <img src="{{ $child->photo->getUrl('thumb') }}">
-                                    </a>
-                                @endif
-                            </td>
-                            <td>
                                 {{ $child->first_name ?? '' }}
                             </td>
                             <td>
@@ -60,6 +53,13 @@
                             </td>
                             <td>
                                 {{ $child->dob ?? '' }}
+                            </td>
+                            <td>
+                                @if($child->photo)
+                                    <a href="{{ $child->photo->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $child->photo->getUrl('thumb') }}">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 @can('child_show')
@@ -132,7 +132,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
-    order: [[ 2, 'desc' ]],
+    order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
   let table = $('.datatable-Child:not(.ajaxTable)').DataTable({ buttons: dtButtons })

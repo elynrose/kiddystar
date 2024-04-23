@@ -8,35 +8,51 @@ use App\Http\Requests\StorePointRequest;
 use App\Http\Requests\UpdatePointRequest;
 use App\Models\Card;
 use App\Models\Point;
+use App\Models\Configuration;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
+use App\Models\UserCard;
+use Carbon\carbon as Carbon;
+use Session;
+use Redirect;
+
 
 class PointsController extends Controller
+
 {
     public function index()
     {
         abort_if(Gate::denies('point_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $points = Point::with(['card', 'created_by'])->get();
+        $points = Point::with(['card', 'created_by'])->where('created_by_id', Auth::user()->id)->get();
 
-        return view('frontend.points.index', compact('points'));
+        return view('frontend.pages.points-awarded', compact('points'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         abort_if(Gate::denies('point_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        if($request->card && !empty($request->card)){
+            $card =  $request->card;
+        }
+       
 
-        $cards = Card::pluck('code', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('frontend.points.create', compact('cards'));
+        return view('frontend.pages.add-points', compact('card'));
     }
 
     public function store(StorePointRequest $request)
     {
         $point = Point::create($request->all());
+        
+        $user_card= UserCard::where('card_id', $request->card_id)
+        ->leftjoin('users', 'users.id', 'user_cards.children_id')->first();
+        $user=$user_card->children->first_name;
+        $points = $request->points;
 
-        return redirect()->route('frontend.points.index');
+        return view('frontend.pages.points-added', compact('points', 'user'));
     }
 
     public function edit(Point $point)

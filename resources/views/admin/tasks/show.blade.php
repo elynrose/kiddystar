@@ -33,14 +33,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.task.fields.category') }}
-                        </th>
-                        <td>
-                            {{ $task->category->name ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.task.fields.points') }}
                         </th>
                         <td>

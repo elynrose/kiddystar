@@ -8,9 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Qonfetty</title>
 
     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -27,16 +30,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/css/perfect-scrollbar.min.css" rel="stylesheet" />
+   
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Barcode+39&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Barcode+39&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+
     @yield('styles')
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Qonfetty
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -47,11 +56,9 @@
                     <ul class="navbar-nav mr-auto">
                         @guest
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('frontend.home') }}">
-                                    {{ __('Dashboard') }}
-                                </a>
-                            </li>
+                      
+                        <i class="fas fa-circle" style="color:green;"></i>
+                       
                         @endguest
                     </ul>
 
@@ -70,86 +77,17 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                   Hi {{ Auth::user()->first_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="{{ route('frontend.profile.index') }}">{{ __('My profile') }}</a>
 
-                                    @can('user_management_access')
-                                        <a class="dropdown-item disabled" href="#">
-                                            {{ trans('cruds.userManagement.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('permission_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.permissions.index') }}">
-                                            {{ trans('cruds.permission.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('role_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.roles.index') }}">
-                                            {{ trans('cruds.role.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('user_access')
-                                        <a class="dropdown-item ml-3" href="{{ route('frontend.users.index') }}">
-                                            {{ trans('cruds.user.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('card_batch_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.card-batches.index') }}">
-                                            {{ trans('cruds.cardBatch.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('card_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.cards.index') }}">
-                                            {{ trans('cruds.card.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('user_card_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.user-cards.index') }}">
-                                            {{ trans('cruds.userCard.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('point_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.points.index') }}">
-                                            {{ trans('cruds.point.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('claim_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.claims.index') }}">
-                                            {{ trans('cruds.claim.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('reward_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.rewards.index') }}">
-                                            {{ trans('cruds.reward.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('child_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.children.index') }}">
-                                            {{ trans('cruds.child.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('task_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.tasks.index') }}">
-                                            {{ trans('cruds.task.title') }}
-                                        </a>
-                                    @endcan
+                                    
                                     @can('user_alert_access')
                                         <a class="dropdown-item" href="{{ route('frontend.user-alerts.index') }}">
                                             {{ trans('cruds.userAlert.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('completed_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.completeds.index') }}">
-                                            {{ trans('cruds.completed.title') }}
-                                        </a>
-                                    @endcan
-                                    @can('category_access')
-                                        <a class="dropdown-item" href="{{ route('frontend.categories.index') }}">
-                                            {{ trans('cruds.category.title') }}
                                         </a>
                                     @endcan
 
@@ -170,6 +108,42 @@
         </nav>
 
         <main class="py-4">
+         <div class="container-fluid">
+            <div class="row">
+            
+            <div class="col-md-2 mb-5">
+                @guest
+                @else
+            <ul class="list-group list-group-flush side-nav">
+  <li class="list-group-item">
+    <a href="{{ route('frontend.home') }}">
+                                  <i class="fas fa-home"></i> {{ __('Dashboard') }}
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('frontend.user-cards.index') }}">
+                                <i class="fas fa-users"></i>  {{ trans('global.menu_children') }}
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('frontend.tasks.index') }}">
+                                <i class="fas fa-list"></i> {{ trans('global.menu_task') }}
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ route('frontend.rewards.index') }}">
+                                <i class="fas fa-gift"></i> {{ trans('global.menu_rewards') }}
+                                </a>
+                            </li>
+                           <li class="list-group-item">
+                                <a href="{{ route('frontend.categories.index') }}">
+                                <i class="fas fa-cog"></i> {{ trans('global.menu_categories') }}
+                                </a>
+                            </li>
+</ul>
+@endguest
+            </div>
+            <div class="col-md-10">
             @if(session('message'))
                 <div class="container">
                     <div class="row">
@@ -194,11 +168,15 @@
                     </div>
                 </div>
             @endif
+
             @yield('content')
+            </div>
+           
+            </div></div>
         </main>
     </div>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
@@ -218,6 +196,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+ <!-- Include jQuery UI library for the slider functionality -->
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('scripts')
 

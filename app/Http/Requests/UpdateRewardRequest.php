@@ -24,11 +24,15 @@ class UpdateRewardRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'category' => [
+                'string',
+            ],
+            'price' => [
+                'required',
+            ],
             'points' => [
                 'required',
                 'integer',
-                'min:-2147483648',
-                'max:2147483647',
             ],
         ];
     }

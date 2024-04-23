@@ -42,6 +42,26 @@
                 <span class="help-block">{{ trans('cruds.reward.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="quantity">{{ trans('cruds.reward.fields.quantity') }}</label>
+                <input class="form-control {{ $errors->has('quantity') ? 'is-invalid' : '' }}" type="number" name="quantity" id="quantity" value="{{ old('quantity', $reward->quantity) }}" step="1">
+                @if($errors->has('quantity'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('quantity') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.reward.fields.quantity_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="price">{{ trans('cruds.reward.fields.price') }}</label>
+                <input class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" type="number" name="price" id="price" value="{{ old('price', $reward->price) }}" step="0.01" required>
+                @if($errors->has('price'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('price') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.reward.fields.price_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="points">{{ trans('cruds.reward.fields.points') }}</label>
                 <input class="form-control {{ $errors->has('points') ? 'is-invalid' : '' }}" type="number" name="points" id="points" value="{{ old('points', $reward->points) }}" step="1" required>
                 @if($errors->has('points'))

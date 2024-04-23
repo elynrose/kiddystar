@@ -49,6 +49,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <td>
+                            {{ $user->last_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.user.fields.verified') }}
                         </th>
                         <td>
@@ -61,14 +69,6 @@
                         </th>
                         <td>
                             <input type="checkbox" disabled="disabled" {{ $user->two_factor ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.last_name') }}
-                        </th>
-                        <td>
-                            {{ $user->last_name }}
                         </td>
                     </tr>
                     <tr>
@@ -113,26 +113,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.partner_email') }}
-                        </th>
-                        <td>
-                            {{ $user->partner_email }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
                         </th>
                         <td>
                             {{ $user->email_verified_at }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.user.fields.partner_password') }}
-                        </th>
-                        <td>
-                            ********
                         </td>
                     </tr>
                     <tr>

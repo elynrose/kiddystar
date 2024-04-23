@@ -11,17 +11,6 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="photo">{{ trans('cruds.child.fields.photo') }}</label>
-                <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
-                </div>
-                @if($errors->has('photo'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('photo') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.child.fields.photo_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label class="required" for="first_name">{{ trans('cruds.child.fields.first_name') }}</label>
                 <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" id="first_name" value="{{ old('first_name', $child->first_name) }}" required>
                 @if($errors->has('first_name'))
@@ -50,6 +39,17 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.child.fields.dob_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="photo">{{ trans('cruds.child.fields.photo') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('photo') ? 'is-invalid' : '' }}" id="photo-dropzone">
+                </div>
+                @if($errors->has('photo'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('photo') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.child.fields.photo_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
