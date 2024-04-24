@@ -309,6 +309,8 @@ return [
     'task' => [
         'title'          => 'Tasks',
         'title_singular' => 'Task',
+        'give' => 'Give',
+        'stars' => 'stars',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => ' ',
@@ -332,7 +334,7 @@ return [
             'category_helper'    => ' ',
         ],
     ],
-    
+
     'category' => [
         'title'          => 'Category',
         'title_singular' => 'Category',

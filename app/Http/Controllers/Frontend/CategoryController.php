@@ -21,16 +21,16 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $categories = Category::with(['media'])->get();
+        $categories = Category::with(['media'])->where('active', 1)->get();
 
-        return view('frontend.categories.index', compact('categories'));
+        return view('frontend.pages.all-categories', compact('categories'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('category_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('frontend.categories.create');
+        return view('frontend.pages.add-category');
     }
 
     public function store(StoreCategoryRequest $request)
