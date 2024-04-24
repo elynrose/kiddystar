@@ -59,7 +59,7 @@
                         <div class="form-group">
                         <input type="hidden" name="card_id" value="{{ $card->id ?? ''}}">
                         <input type="hidden" name="created_by_id" value="{{ Auth::id() ?? ''}}">
-                        <input class="form-control" type="hidden" name="unique" id="unique" value="{{ App\Models\Child::generateUniqueCode(10, 'Children')}}" required>
+                        <input class="form-control" type="hidden" name="unique" id="unique" value="{{ App\Models\Child::generateUniqueCode(10, 'children')}}" required>
 
                             <button class="btn btn-danger" type="submit">
                                 {{ trans('global.save') }}
