@@ -1,6 +1,6 @@
 <?php
 Route::get('optimize-clear', function () {
-    Artisan::call('optmize:clear');
+    Artisan::call('optimize:clear');
 });
 Route::get('storage-link', function () {
     Artisan::call('storage:link');
