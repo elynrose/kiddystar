@@ -1,4 +1,7 @@
 <?php
+Route::get('link', function () {
+    Artisan::call('storage:link');
+});
 Route::get('/scan/{card}', 'ScanController@index')->name('scan');
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
