@@ -1,5 +1,8 @@
 <?php
-Route::get('link', function () {
+Route::get('optimize-clear', function () {
+    Artisan::call('optmize:clear');
+});
+Route::get('storage-link', function () {
     Artisan::call('storage:link');
 });
 Route::get('/scan/{card}', 'ScanController@index')->name('scan');
