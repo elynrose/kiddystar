@@ -11,8 +11,8 @@
              </div>
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between mb-3">
-                        <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-plus"></i> Add Points</a>
-                        <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-gift"></i> Claim Points</a>
+                        <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-plus"></i>  {{ trans('global.add_stars') }}</a>
+                        <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-gift"></i>  {{ trans('global.claim_stars') }}</a>
                     </div>
 
           
@@ -25,7 +25,7 @@
                     </div>
                     <div class="list-group">
                         @foreach($all_points as $key => $point)
-                            <li class="list-group-item"><span class="text-muted px-1"><i class="fas fa-clock"></i> {{ $point->created_at->diffForHumans() ?? '' }}</span> {{ $userCard->children->first_name ?? 'N/A' }} earned {{ $point->points ?? 'N/A' }} point(s) for task: "<em>{{$point->reason}}</em>"</li>
+                            <li class="list-group-item"><span class="text-muted px-1"><i class="fas fa-clock"></i> {{ $point->created_at->diffForHumans() ?? '' }}</span> {{ $userCard->children->first_name ?? 'N/A' }} earned {{ $point->points ?? 'N/A' }} stars @if($point->reason) for task: "<em>{{$point->reason}} @endif</em>"</li>
                         @endforeach
                     </div>
                     @else

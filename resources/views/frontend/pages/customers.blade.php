@@ -22,9 +22,9 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center"><a href="{{ route('scan', $userCard->card->code) }}" class="card-link">{{ $userCard->children->first_name ?? '' }}  {{ $userCard->children->last_name ?? '' }}</a>  <span class="badge badge-default badge-pill">Points: {{ App\Models\TotalPoint::points($userCard->card_id) }}</span></li>
                                 </ul>
                                 <div class="card-body">
-                                <h6 class="card-subtitle mb-2 text-muted number">{{ $userCard->card->code ?? 'N/A' }}</h6>
-                                    <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-star yellow"></i> {{ trans('global.add_stars') }}</a>
-                                    <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-gift"></i> {{ trans('global.claim_stars') }}</a>
+                                <h6 class="card-subtitle mb-2 text-muted number mt-3 mb-4">{{ $userCard->card->code ?? 'N/A' }}</h6>
+                                    <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-star yellow"></i></a>
+                                    <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-gift"></i> </a>
                                     <a href="{{ route('frontend.children.edit', ['child'=>$userCard->children_id]) }}" class="btn btn-default btn-sm"><i class="fas fa-user-edit"></i></a>
 
                                   

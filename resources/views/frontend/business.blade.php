@@ -51,8 +51,8 @@
                                     <li class="list-group-item">Balance: {{ App\Models\Point::where('card_id', $userCard->card->id)->sum('points') - App\Models\Claim::where('card_id', $userCard->card->id)->sum('points') }}</li>
                                 </ul>
                                 <div class="card-body">
-                                    <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-success btn-sm">Add Points</a>
-                                    <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-info btn-sm">Claim Points</a>
+                                    <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-success btn-sm">Add Stars</a>
+                                    <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-info btn-sm">Claim stars</a>
                                 </div>
                             </div>
                         </div>

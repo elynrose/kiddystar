@@ -45,8 +45,8 @@
                                 </ul>
                                 <div class="card-body">
                                 <h6 class="card-subtitle mb-2 text-muted number">{{ $userCard->card->code ?? 'N/A' }}</h6>
-                                    <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-star yellow"></i> {{ trans('global.add_stars') }}</a>
-                                    <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-gift"></i> {{ trans('global.claim_stars') }}</a>
+                                    <a href="{{ route('frontend.add_points', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-star yellow"></i> </a>
+                                    <a href="{{ route('frontend.add_claims', ['card'=>$userCard->card->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-gift"></i> </a>
                                 </div>
                             </div>
                         </div>

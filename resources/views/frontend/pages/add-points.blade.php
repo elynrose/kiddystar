@@ -6,7 +6,7 @@
 
             <div class="card shadow-sm p-3 mb-5 bg-white rounded">
                 <div class="card-header">
-               <h5>{{ _('Add') }} {{ trans('cruds.point.fields.points') }}</h5> 
+               <h5> <i class="fas fa-star yellow"></i> {{ _('Add') }} {{ trans('cruds.point.fields.points') }}</h5> 
                 </div>
 
                 <div class="card-body">
@@ -40,9 +40,9 @@
                         <div class="form-group">
                         <div class="row">
             <div class="col-md-12">
-                <button class="btn" id="decrease"><i class="fas fa-minus-circle"></i></button>
+                <button class="" id="decrease"><i class="fas fa-minus-circle"></i></button>
                 <input type="range" id="slider-range" min="1" max="100" value="50" class="slider mx-">
-                <button class="btn" id="increase"><i class="fas fa-plus-circle"></i></button>
+                <button class="" id="increase"><i class="fas fa-plus-circle"></i></button>
             </div>
         </div>
             </div>

@@ -1,6 +1,100 @@
-html,body {
- 
+/* Typography */
+body {
+    font-family: Arial, sans-serif;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+p {
+    line-height: 1.5;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Forms */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+select.form-control, textarea.form-control {
+    height: auto;
+}
+
+/* Cards */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Body Background */
+body {
+    background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    background-size: cover;
+    height: 100vh;
+
+}
+
+.card-body {
+   opacity: 0.8;
+}
+
+/* Grid System */
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col {
+    float: left;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* Responsive Classes */
+@media (max-width: 768px) {
+    .col {
+        width: 100%;
+    }
+}
+
 
 .case {
     border: 21px solid #e9ee6259;
