@@ -19,6 +19,7 @@ class ChildrenController extends Controller
 {
     use MediaUploadingTrait;
 
+
     public function index()
     {
         abort_if(Gate::denies('child_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');

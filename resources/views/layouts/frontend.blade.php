@@ -45,7 +45,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Qonfetty
+                    Kidystar
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -53,12 +53,36 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav m-lauto">
                         @guest
+
                         @else
-                      
-                        <i class="fas fa-circle" style="color:green;"></i>
                        
+                        <li class="nav-item px-3">
+                                 <a href="{{ route('frontend.home') }}" class="nav-link">
+                                  <i class="fas fa-home"></i> {{ __('Dashboard') }}
+                                </a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a href="{{ route('frontend.user-cards.index') }}" class="nav-link">
+                                <i class="fas fa-users"></i>  {{ trans('global.menu_children') }}
+                                </a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a href="{{ route('frontend.tasks.index') }}" class="nav-link">
+                                <i class="fas fa-list"></i> {{ trans('global.menu_task') }}
+                                </a>
+                            </li>
+                            <li class="nav-item px-3">
+                                <a href="{{ route('frontend.rewards.index') }}" class="nav-link">
+                                <i class="fas fa-gift"></i> {{ trans('global.menu_rewards') }}
+                                </a>
+                            </li>
+                           <li class="nav- px-3">
+                                <a href="{{ route('frontend.categories.index') }}" class="nav-link">
+                                <i class="fas fa-cog"></i> {{ trans('global.menu_categories') }}
+                                </a>
+                            </li>                      
                         @endguest
                     </ul>
 
@@ -109,41 +133,9 @@
 
         <main class="py-4">
          <div class="container-fluid">
-            <div class="row">
-            
-            <div class="col-md-2 mb-5">
-                @guest
-                @else
-            <ul class="list-group list-group-flush side-nav">
-  <li class="list-group-item">
-    <a href="{{ route('frontend.home') }}">
-                                  <i class="fas fa-home"></i> {{ __('Dashboard') }}
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('frontend.user-cards.index') }}">
-                                <i class="fas fa-users"></i>  {{ trans('global.menu_children') }}
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('frontend.tasks.index') }}">
-                                <i class="fas fa-list"></i> {{ trans('global.menu_task') }}
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="{{ route('frontend.rewards.index') }}">
-                                <i class="fas fa-gift"></i> {{ trans('global.menu_rewards') }}
-                                </a>
-                            </li>
-                           <li class="list-group-item">
-                                <a href="{{ route('frontend.categories.index') }}">
-                                <i class="fas fa-cog"></i> {{ trans('global.menu_categories') }}
-                                </a>
-                            </li>
-</ul>
-@endguest
-            </div>
-            <div class="col-md-10">
+            <div class="row justify-content-center">
+         
+            <div class="col-md-8">
             @if(session('message'))
                 <div class="container">
                     <div class="row">

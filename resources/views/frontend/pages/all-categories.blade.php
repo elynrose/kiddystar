@@ -5,8 +5,8 @@
         <div class="col-md-12">
             @can('category_create')
                 <div class="mb-4">
-                    <a class="btn btn-success" href="{{ route('frontend.categories.create') }}">
-                        {{ trans('global.add') }} {{ trans('cruds.category.title_singular') }}
+                    <a class="btn btn-default" href="{{ route('frontend.categories.create') }}">
+                       <i class="fas fa-plus"></i> {{ trans('cruds.category.title_singular') }}
                     </a>
                 </div>
             @endcan

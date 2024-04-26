@@ -15,7 +15,7 @@
                         @if($userCards->isNotEmpty())
                        
                         @foreach($userCards as $userCard)
-                        <div class="col-md-4 mt-3">
+                        <div class="col-md-6 mt-3">
                             <div class="card mb-4 shadow-sm mb-5 bg-white rounded">
                            
                                 <ul class="list-group list-group-flush">
