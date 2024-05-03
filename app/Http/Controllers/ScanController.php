@@ -16,7 +16,7 @@ class ScanController extends Controller
 
         if ($card) {
             // Check if the card is registered to a user
-            $userCard = UserCard::where('card_id', $card->id)->first();
+            $userCard = UserCard::with('children')->where('card_id', $card->id)->first();
 
             if ($userCard) {
                 // User is logged in
@@ -60,7 +60,10 @@ class ScanController extends Controller
                                          ->sum('points');
                     $total_points_earned = ($user_points - $user_claims);
 
-                    return view('frontend.pages.mypoints', compact('total_points_earned'));
+                    $name = $userCard->children->first_name.' '.$userCard->children->last_name;
+
+
+                    return view('frontend.pages.mypoints', compact('total_points_earned', 'name'));
                 }
             } else {
                 // User is logged in
