@@ -80,7 +80,8 @@ class ScanController extends Controller
                 return view('frontend.pages.scan', compact('userCard', 'user_points', 'all_points', 'user_claims', 'all_claims', 'chart2'));
 
                 } else {
-                                    $user_points = Point::where('card_id', $userCard->card_id)
+                    
+                    $user_points = Point::where('card_id', $userCard->card_id)
                                     ->sum('points');
                         dd($user_points);
                                     }
