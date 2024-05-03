@@ -49,9 +49,11 @@ class ScanController extends Controller
                                          ->where('created_by_id', Auth::user()->id)
                                          ->sum('points');
 
-                    $total_points_earned = ($user_points - $user_claims);
+                    $all_points = Point::where('card_id', $userCard->card_id)
+                    ->where('created_by_id', Auth::user()->id)
+                    ->get();
 
-                    return view('frontend.pages.scan', compact('userCard', 'user_points', 'user_claims', 'total_points_earned', 'chart2'));
+                    return view('frontend.pages.scan', compact('userCard', 'user_points', 'all_points', 'user_claims', 'chart2'));
                 } else {
                     // User not logged in
                     $user_points = Point::where('card_id', $userCard->card_id)
