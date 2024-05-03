@@ -26,6 +26,7 @@ class ScanController extends Controller
         $card = $this->cardExist($request->card);
         
         if ($card) {
+            if(Auth::check()){
             // Check if the card is already registered to a user.
             $userCard = UserCard::where('card_id', $card->id)->first();
 
@@ -67,6 +68,19 @@ class ScanController extends Controller
 
                 // Return the view with the collected data.
                 return view('frontend.pages.scan', compact('userCard', 'user_points', 'all_points', 'user_claims', 'all_claims', 'chart2'));
+            }
+            else 
+            {
+                //If the user is not logged in but card exists pull the points for the particular card
+                $user_points = Point::where('card_id', $userCard->card_id)
+                                    ->sum('points');
+                $user_claims = Claim::where('card_id', $userCard->card_id)
+                                    ->sum('points');
+                $total_points_earned = ($user_points - $user_claims);
+
+                return view('frontend.pages.mypoints', compact('total_points_earned'));  
+                
+            }
             } else {
                 //Check if the user is logged in
 
