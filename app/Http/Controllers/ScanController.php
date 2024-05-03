@@ -70,7 +70,7 @@ class ScanController extends Controller
                 // Return the view with the collected data.
                 return view('frontend.pages.scan', compact('userCard', 'user_points', 'all_points', 'user_claims', 'all_claims', 'chart2'));
             }
-            elseif(!Auth::check()) 
+            else
             {
                 //If the user is not logged in but card exists pull the points for the particular card
                 $user_points = Point::where('card_id', $userCard->card_id)
@@ -79,7 +79,7 @@ class ScanController extends Controller
                                     ->sum('points');
                 $total_points_earned = ($user_points - $user_claims);
 
-                return view('frontend.pages.mypoints', compact('total_points_earned'));  
+               // return view('frontend.pages.mypoints', compact('total_points_earned'));  
                 
             }
             } else {
