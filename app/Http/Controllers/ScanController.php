@@ -68,11 +68,16 @@ class ScanController extends Controller
                 // Return the view with the collected data.
                 return view('frontend.pages.scan', compact('userCard', 'user_points', 'all_points', 'user_claims', 'all_claims', 'chart2'));
             } else {
-                //Check if the user exist already
+                //Check if the user is logged in
+
+                if(Auth::check()){
+                    // If the card is not registered, direct to card registration view.
+                    return view('frontend.pages.add-card', compact('card'));                   
+                } else {
+                    return view('login'); 
+                }
 
 
-                // If the card is not registered, direct to card registration view.
-                return view('frontend.pages.add-card', compact('card'));
             }            
         } else {
             // If the card does not exist, return a 404 view.
