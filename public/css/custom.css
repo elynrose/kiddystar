@@ -286,3 +286,28 @@ table.dataTable thead .sorting_desc {
     color: gray;
     cursor: not-allowed;
 }
+
+/* Radio buttons */
+.occourance-radio {
+    display: flex;
+    flex-direction: column;
+}
+
+.occourance-radio .form-check {
+    margin-bottom: 0.5rem;
+}
+
+/* Style the radio button */
+.occourance-radio .form-check-input {
+    margin-right: 0.5rem;
+}
+
+/* Style the label for the radio button */
+.occourance-radio .form-check-label {
+    margin-bottom: 0;
+}
+
+/* Style the label when radio button is checked */
+.occourance-radio .form-check-input:checked + .form-check-label {
+    font-weight: bold;
+}

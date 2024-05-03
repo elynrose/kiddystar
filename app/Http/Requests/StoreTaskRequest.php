@@ -37,6 +37,9 @@ class StoreTaskRequest extends FormRequest
             'occourance' => [
                 'required',
             ],
+            'complete_by' => [
+                'date_format:' . config('panel.date_format'),
+            ],
         ];
     }
 }

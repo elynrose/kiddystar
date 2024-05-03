@@ -58,27 +58,27 @@
 
                         @else
                        
-                        <li class="nav-item px-3">
+                        <li class="nav-item">
                                  <a href="{{ route('frontend.home') }}" class="nav-link">
                                   <i class="fas fa-home"></i> {{ __('Dashboard') }}
                                 </a>
                             </li>
-                            <li class="nav-item px-3">
+                            <li class="nav-item px-2">
                                 <a href="{{ route('frontend.user-cards.index') }}" class="nav-link">
                                 <i class="fas fa-users"></i>  {{ trans('global.menu_children') }}
                                 </a>
                             </li>
-                            <li class="nav-item px-3">
+                            <li class="nav-item">
                                 <a href="{{ route('frontend.tasks.index') }}" class="nav-link">
                                 <i class="fas fa-list"></i> {{ trans('global.menu_task') }}
                                 </a>
                             </li>
-                            <li class="nav-item px-3">
+                            <li class="nav-item">
                                 <a href="{{ route('frontend.rewards.index') }}" class="nav-link">
                                 <i class="fas fa-gift"></i> {{ trans('global.menu_rewards') }}
                                 </a>
                             </li>
-                           <li class="nav- px-3">
+                           <li class="nav-item">
                                 <a href="{{ route('frontend.categories.index') }}" class="nav-link">
                                 <i class="fas fa-cog"></i> {{ trans('global.menu_categories') }}
                                 </a>
@@ -101,7 +101,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                   Hi {{ Auth::user()->name }} <span class="caret"></span>
+                                   Hi {{ Auth::user()->first_name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\UserCard;
 use App\Models\Claim;
 use App\Models\Children;
+use App\Models\Completed;
 use App\Models\Task;
 use Gate;
 use Illuminate\Http\Request;
@@ -128,7 +129,17 @@ class UserCardController extends Controller
             'created_by_id'=>Auth::user()->id,
         ];
 
-        Point::create( $user_points );
+        $create_points = Point::create( $user_points );
+
+        if($create_points){
+            Completed::create(
+                [
+                    'child_id'=>$data['child'],
+                    'task_id'=>$data['task'],
+                    'created_by_id'=>Auth::user()->id,
+                ]
+            );
+        }
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Record not found'], 404);

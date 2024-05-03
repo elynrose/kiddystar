@@ -10,22 +10,34 @@
                     </a>
                 </div>
             @endcan
-            <input type="text" id="searchInput" class="form-control mb-3" onkeyup="searchTasks()" placeholder="Search tasks...">
+            <input type="text" id="searchInput" class="form-control mb-3 px-3" onkeyup="searchTasks()" placeholder="Search tasks...">
             <div class="row" id="tasksList">
                 @foreach($tasks as $task)
+
+                @if($task->occourance=='0' || $task->occourance==1 && $task->complete_by >= date('Y-m-d'))
                     <div class="col-md-12 search-item">
                         <div class="card mb-4">
                    
                             <div class="card-body">
-                                <h5> {{ $task->task_name }} ({{ $task->points }})</h5>
-                                {{ App\Models\Task::OCCOURANCE_SELECT[$task->occourance] ?? '' }}<br>Assigned To: 
+                            {{ $task->completed->id ?? '' }}
+                                <h3> {{ $task->task_name }} ({{ $task->points }})</h3> 
+                                <p> <span>{{ $task->category->name ?? '' }}</span><br>
+                                  {{ App\Models\Task::OCCOURANCE_SELECT[$task->occourance] ?? '' }}<br>Assigned To: 
                                     @foreach($task->assigned_tos as $assigned)
                                        <span class="badge badge-success"> {{ $assigned->first_name }} </span>
                                     @endforeach</p>
                                 <div class="align-items-left">
                                 @foreach($task->assigned_tos as $assigned)
-                                <a href="{{ route('frontend.completed')}}" data-task="{{$task->id}}" data-child="{{$assigned->pivot->child_id}}" class="btn btn-default btn-sm done" id="btn-{{$task->id}}_{{$assigned->pivot->child_id}}"><i class="fas fa-star yellow fa-{{$task->id}}_{{$assigned->pivot->child_id}}"></i> {{ trans('cruds.task.give') }}  {{ $assigned->first_name }} {{ trans('cruds.task.stars') }} </a>
+
+                                @if($task->is_completed !== null)
+                                <a  class="btn btn-default btn-sm"><i class="fas fa-check yellow fa-{{$task->id}}_{{$assigned->pivot->child_id}}"></i>  {{ $assigned->first_name }}  </a>
+
+                                @else 
+                                <a href="{{ route('frontend.completed')}}" class="btn btn-success btn-sm done" data-task="{{$task->id}}" data-child="{{$assigned->pivot->child_id}}" id="btn-{{$task->id}}_{{$assigned->pivot->child_id}}"><i class="fas fa-star yellow fa-{{$task->id}}_{{$assigned->pivot->child_id}}"></i> {{ trans('cruds.task.give') }}  {{ $assigned->first_name }} {{ trans('cruds.task.stars') }} </a>
+
+                                @endif
                                     @endforeach
+
                                     @can('task_edit')
                                         <a href="{{ route('frontend.tasks.edit', $task->id) }}" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a>
                                     @endcan
@@ -40,6 +52,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif
+                 
                 @endforeach
             </div>
         </div>

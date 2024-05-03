@@ -13,6 +13,7 @@ class CreateTasksTable extends Migration
             $table->string('task_name');
             $table->integer('points');
             $table->string('occourance');
+            $table->date('complete_by');
             $table->timestamps();
             $table->softDeletes();
         });

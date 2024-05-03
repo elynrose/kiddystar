@@ -332,6 +332,8 @@ return [
             'created_by_helper'  => ' ',
             'category'           => 'Category',
             'category_helper'    => ' ',
+            'complete_by'    => 'Complete by',
+            'complete_by_helper'    => '',
         ],
     ],
 

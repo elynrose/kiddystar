@@ -9,10 +9,13 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Child;
 use App\Models\Task;
 use App\Models\Category;
+use App\Models\Completed;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Auth;
+use Carbon\Carbon;
+
 
 class TasksController extends Controller
 {
@@ -20,7 +23,13 @@ class TasksController extends Controller
     {
         abort_if(Gate::denies('task_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tasks = Task::with(['category', 'assigned_tos', 'created_by'])->get();
+        $today = Carbon::today()->toDateString();
+
+        $tasks = Task::leftJoin('completeds', 'tasks.id', '=', 'completeds.task_id')
+                     ->select('tasks.*', 'completeds.task_id as is_completed')
+                     ->where('tasks.created_by_id', '=', Auth::id())
+                     //->whereDate('completeds.created_at', '>=', $today)
+                     ->get();
 
         return view('frontend.pages.all-tasks', compact('tasks'));
     }
@@ -53,7 +62,7 @@ class TasksController extends Controller
 
         $task->load('category', 'assigned_tos', 'created_by');
 
-        return view('frontend.tasks.edit', compact('assigned_tos', 'categories', 'task'));
+        return view('frontend.pages.edit-task', compact('assigned_tos', 'categories', 'task'));
     }
 
     public function update(UpdateTaskRequest $request, Task $task)
