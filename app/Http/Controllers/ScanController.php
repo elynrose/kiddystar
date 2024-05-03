@@ -13,14 +13,7 @@ use LaravelDaily\LaravelCharts\Classes\LaravelFrontChart;
 
 class ScanController extends Controller
 {
-    /**
-     * Apply authentication middleware to the controller.
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
+   
     /**
      * Handle the display of scanned card information.
      *
