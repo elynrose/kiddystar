@@ -74,8 +74,7 @@ class ScanController extends Controller
                     // If the card is not registered, direct to card registration view.
                     return view('frontend.pages.add-card', compact('card'));                   
                 } else {
-                    $user_points = Point::where('card_id', $userCard->card_id)->sum('points');
-                    return view('auth.login', compact('points')); 
+                    return view('auth.login'); 
                 }
 
 
