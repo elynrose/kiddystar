@@ -18,7 +18,7 @@ class ScanController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
     }
 
     /**
@@ -37,10 +37,6 @@ class ScanController extends Controller
             $userCard = UserCard::where('card_id', $card->id)->first();
 
             if ($userCard) {
-
-                if(Auth::check()) {
-
-                    
                 $settings2 = [
                     'chart_title'           => 'Points',
                     'chart_type'            => 'line',
@@ -78,26 +74,12 @@ class ScanController extends Controller
 
                 // Return the view with the collected data.
                 return view('frontend.pages.scan', compact('userCard', 'user_points', 'all_points', 'user_claims', 'all_claims', 'chart2'));
-
-                } else {
-                    
-                    $user_points = Point::where('card_id', $userCard->card_id)
-                                    ->sum('points');
-                        dd($user_points);
-                                    }
             } else {
                 //Check if the user exist already
 
-                if(Auth::check()){
 
                 // If the card is not registered, direct to card registration view.
                 return view('frontend.pages.add-card', compact('card'));
-
-                } else {
-                    return view('auth.login');
-
-                }
-
             }            
         } else {
             // If the card does not exist, return a 404 view.
